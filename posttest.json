@@ -1,0 +1,86 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "At resonance, for underdamped system increasing the value of damping would lead to ?",
+      "answers": {
+        "a": "decrease in steady state amplitude",
+        "b": "increase in steady state amplitude",
+        "c": "increase then decrease in steady state amplitude",
+        "d": "decrease then increase in steady state amplitude"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    },
+    {
+      "question": "A system with 10kg mass 10N/m stiffness and 2.5Ns/m damping is being operated at 1rad/s if X<sub>st</sub>=1cm what is the value of X<sub>0</sub>?",
+      "answers": {
+        "a": "2cm",
+        "b": "1cm",
+        "c": "4cm",
+        "d": "none of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": ""
+    },
+    {
+      "question": "Phase difference between input and response at resonance is 90<sup>o</sup>",
+      "answers": {
+        "a": "true",
+        "b": "false"
+      },
+      "explanations": {
+        "a": "",
+        "b": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    },
+    {
+      "question": "What is the phase difference between input and response for a system with 10kg mass 10N/m stiffness and 15Ns/m damping being operated at 0.5 rad/s",
+      "answers": {
+        "a": "45<sup>o</sup>",
+        "b": "90<sup>o</sup>",
+        "c": "30<sup>o</sup>",
+        "d": "none of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    },
+    {
+      "question": "Amplification factor of a system was found to be 2 at resonance. What would be its damping ratio?",
+      "answers": {
+        "a": "0.5",
+        "b": "0.25",
+        "c": "0.125",
+        "d": "1"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": ""
+    }
+  ]
+}

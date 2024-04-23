@@ -1,0 +1,86 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Which of the following is a forced vibration system?",
+      "answers": {
+        "a": "Wind blowing at tree top",
+        "b": "Ocean waves at offshore rig",
+        "c": "Car moving on a rough road",
+        "d": "All of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "d",
+      "difficulty": ""
+    },
+    {
+      "question": "Base of a mechanical system is being given a harmonic input motion starting from its mean position. Amplitude and frequency of the input motion is 5mm and π/2 rad/s respectively. What will be the position of the base (with respect to mean position) after 3seconds ?",
+      "answers": {
+        "a": "-5mm",
+        "b": "0mm",
+        "c": "5mm",
+        "d": "None of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    },
+    {
+      "question": "Which of the following could be governing equation for forced vibration system with base excitation of y=y<sub>0</sub>sin ωt ?",
+      "answers": {
+        "a": "<img src=\"./images/exp4T1.png\" style='height:auto;width:auto'/>",
+        "b": "<img src=\"./images/exp4T2.png\" style='height:auto;width:auto'/>",
+        "c": "<img src=\"./images/exp4T4.png\" style='height:auto;width:auto'/>",
+        "d": "none of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": ""
+    },
+    {
+      "question": "Solution of forced vibration system consists of",
+      "answers": {
+        "a": "Both Steady State and Transient part",
+        "b": "Only Steady State part",
+        "c": "Only Transient Part",
+        "d": "None of these"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    },
+    {
+      "question": "<img src='./images/exp5T1.png' style='height:auto;width:auto'/><br>The above equation gives the steady state amplitude for a system with base excitation y=y<sub>0</sub>sin&omega;t.",
+      "answers": {
+        "a": "True",
+        "b": "False"
+      },
+      "explanations": {
+        "a": "",
+        "b": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": ""
+    }
+  ]
+}
