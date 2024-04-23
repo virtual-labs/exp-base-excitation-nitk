@@ -232,6 +232,9 @@ em:current font size
     width: 100%;
     height: auto;
   }
+  .tool-list span {
+    font-size: 1.5rem;
+  }
 }
 
 /* **************************** */
@@ -245,7 +248,9 @@ em:current font size
     padding: 0.5rem;
     gap: 1rem;
   }
-
+  .tool-list span {
+    font-size: 1.4rem;
+  }
   .title-div h1 {
     padding: 0.2rem;
 

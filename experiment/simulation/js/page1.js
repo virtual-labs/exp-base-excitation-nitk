@@ -62,9 +62,9 @@ function runPage1() {
   document.querySelector("#k").textContent = (w / spring1.wn).toFixed(4);
   document.querySelector("#c").textContent = z.toFixed(4);
 
-  //   textSize(24);
-  //   fill(0, 0, 0);
-  //   text("Harmonic Exitation", 95, 495);
+    textSize(24);
+    fill(0, 0, 0);
+    text("Harmonic Exitation", 200, 40);
 
   //   k.draw();
   //   m.draw();
