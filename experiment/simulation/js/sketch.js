@@ -1,8 +1,6 @@
 // canvas
 let width = 800;
 let height = 600;
-let w = 10;
-let h = 10;
 
 // counter
 let t = 0.05;
@@ -17,13 +15,6 @@ let force_graph;
 let magFac;
 let phaseAng;
 let relative;
-
-// inputs
-let y;
-let _w;
-let k;
-let m;
-let z;
 
 // factor
 let factor = 1;
@@ -40,7 +31,7 @@ let spr;
 let page1 = true;
 let page2 = false;
 let page3 = false;
-
+let graphStep = 0;
 // animation
 let animation = true;
 let touch = false;
@@ -48,55 +39,157 @@ let touch = false;
 // button
 let clear;
 
+let clear1 = document.getElementById("cleargraph");
+
 function preload() {
-    play = loadImage("images/blueplaydull.png");
-    pause = loadImage("images/bluepausedull.png");
-    graph = loadImage("images/graphbutton.png");
-    back = loadImage("images/bluebkdulls.png");
-    next = loadImage("images/bluefwddulls.png");
-    bg = loadImage("images/frame_copper_ver02.png");
-    spr = loadImage("images/spring.png");
+  spr = loadImage("images/spring.png");
 }
 
 function setup() {
-    textFont("Comic Sans MS");
+  //   textFont("Comic Sans MS");
 
-    createCanvas(width, height);
-    spring1 = new System(170, 230, 180, 50);
+  var sketchCanvas = createCanvas(600, 450);
+  sketchCanvas.parent("canvas-container");
 
-    y1_graph = new Graph(345, 200, 80, 220, "Output x", "t");
-    y2_graph = new Graph(345, 380, 80, 220, "Input Ysin(wt)", "t");
+  spring1 = new System(170, 130, 180, 50);
 
-    magFac = new DynamicGraph(125, 350, 230, 290, "Transmissibility", "n", 0, 2.5, 0, 7.5, System.mag_func);
-    phaseAng = new DynamicGraph(125, 350, 150, 290, "Phase Angle", "n", 0, 2.5, 0, 180, System.phase_func);
+  y1_graph = new Graph(345, 150, 80, 220, "Output x", "t");
+  y2_graph = new Graph(345, 330, 80, 220, "Input Ysin(wt)", "t");
 
-    k = new NumberInput(620, 150, "Stiffness(N/m)", 8000, 999000, 20000, 0.5, true);
-    m = new NumberInput(620, 200, "Mass(kg)", 2, 200, 32, 0.5, true);
-    z = new NumberInput(620, 253, "Damping Ratio", 0.01, 1.00, 0.07, 0.01, true);
-    y = new NumberInput(620, 300, "Exitation Magn-\nitude (m)", 0, 25, 20, 0.5, false);
-    _w = new NumberInput(620, 350, "Exitation Freq-\nuency (rad/s)", 1, 800, 50, 0.5, false);
+  magFac = new DynamicGraph(
+    125,
+    350,
+    230,
+    290,
+    "Transmissibility",
+    "n",
+    0,
+    2.5,
+    0,
+    7.5,
+    System.mag_func
+  );
+  phaseAng = new DynamicGraph(
+    125,
+    350,
+    150,
+    290,
+    "Phase Angle",
+    "n",
+    0,
+    2.5,
+    0,
+    180,
+    System.phase_func
+  );
 
-    button1 = new Button(645, 460, pause)
-    button2 = new Button(711, 460, graph);
-    button3 = new Button(645, 460, back);
-    button4 = new Button(711, 460, next);
+  varinit();
+  k = $("#stiffnessSpinner").spinner("value");
+  m = $("#massSpinner").spinner("value");
+  z = $("#dampingSpinner").spinner("value");
+  y = $("#magnitudeSpinner").spinner("value");
+  w = $("#frequencySpinner").spinner("value");
 }
 
 function draw() {
+  if (page1) {
+    runPage1();
+  }
 
-    if (page1) {
-        runPage1();
-    }
+  if (page2) {
+    runPage2();
+  }
 
-    if (page2) {
-        runPage2();
-    }
-    
-    if (page3) {
-        runPage3();
-    }
+  if (page3) {
+    runPage3();
+  }
 }
 
-function mousePressed() {
-    handleEvents();
+// switches state of simulation between 0:Playing & 1:Paused
+function simstate() {
+  var imgfilename = document.getElementById("playpausebutton").src;
+  imgfilename = imgfilename.substring(
+    imgfilename.lastIndexOf("/") + 1,
+    imgfilename.lastIndexOf(".")
+  );
+
+  if (animation) {
+    noLoop();
+    animation = false;
+    document.getElementById("playpausebutton").src = "images/blueplaydull.svg";
+    document.querySelector(".playPause").textContent = "Play";
+  } else {
+    loop();
+    animation = true;
+    document.getElementById("playpausebutton").src = "images/bluepausedull.svg";
+    document.querySelector(".playPause").textContent = "Pause";
+  }
+}
+
+function graphPlot() {
+  graphStep = 1;
+  document.querySelector(".graph-one").classList.remove("display-hide");
+  document.querySelector(".graph-two").classList.remove("display-hide");
+  document.querySelector(".graph-div span").textContent = "Prev/Next";
+  document.querySelector(".graph-button").style.display = "none";
+  screenchangePhase();
+}
+
+function screenchangePhase() {
+  document.getElementById("cleargraph").style.visibility = "visible";
+
+  phaseAngleGraph();
+}
+
+function screenchangeMag() {
+  magnitudeGraph();
+  graphStep += 1;
+  document.getElementById("cleargraph").style.visibility = "visible";
+  document.querySelector(".graph-two").classList.add("display-hide");
+  document.querySelector(".graph-div span").textContent = "Prev";
+}
+
+function screenChangePrevious() {
+  graphStep -= 1;
+  if (graphStep > 0) {
+    phaseAngleGraph();
+    document.querySelector(".graph-two").classList.remove("display-hide");
+    document.querySelector(".graph-div span").textContent = "Prev/Next";
+    document.getElementById("cleargraph").style.visibility = "visible";
+  } else {
+    document.querySelector(".graph-div span").textContent = "";
+    document.querySelector(".graph-button").style.display = "flex";
+    document.querySelector(".graph-one").classList.add("display-hide");
+    document.querySelector(".graph-two").classList.add("display-hide");
+    page1 = true;
+    page2 = false;
+    page3 = false;
+    document.getElementById("cleargraph").style.visibility = "hidden";
+
+    document.querySelector(".graph-zero").classList.remove("display-hide");
+    document.querySelector(".graph-button span").textContent = "Graph";
+    //  document.querySelector(".graph-button").classList.remove("display-hide");
+    document.querySelector(".graph-div").classList.add("display-hide");
+  }
+}
+function phaseAngleGraph() {
+  resetGraphs();
+  clearMe();
+  page1 = false;
+  page2 = true;
+  page3 = false;
+
+  magFac.initialise();
+  phaseAng.initialise();
+}
+
+function magnitudeGraph() {
+  resetGraphs();
+  clearMe();
+  page1 = false;
+  page2 = false;
+  page3 = true;
+
+  magFac.initialise();
+  phaseAng.initialise();
 }
